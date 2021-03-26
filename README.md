@@ -2,7 +2,11 @@
 
 D-dimensional Hilbert curve for Rust.
 
-This crate requires Rust 1.51 or later, due to use of [const-generics](https://rust-lang.github.io/rfcs/2000-const-generics.html).
+
+## Requirements
+
+This crate requires Rust 1.51 or later, due to [const-generics](https://rust-lang.github.io/rfcs/2000-const-generics.html).
+Const-generics enables us to use `[usize; D]` instead of `Vec<usize>`.
 
 
 ## Features
@@ -20,9 +24,6 @@ Input outside the range is not supported and may cause unexpected results.
 The implemented algorithm is based on Chris Hamilton's report, 
 "[Compact Hilbert Indices](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.133.7490&rep=rep1&type=pdf)".
 See also [Compact Hilbert indices: Space-filling curves for domains with unequal side lengths](https://doi.org/10.1016/j.ipl.2007.08.034).
-
-Main focus of this crate is to use const-generics,
-which enables us to use `[usize; D]` instead of `Vec<usize>`.
 
 
 ## Usage
