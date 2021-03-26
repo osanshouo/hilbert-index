@@ -40,7 +40,7 @@
 //! let level = 2;
 //! for hindex in hilbert_index::indices::<D>(level) {
 //!     let position: [usize; D] = hindex.from_hilbert_index(level);
-//!     println!("p[{:02}] = {:?}", hilbert_index, position);
+//!     println!("p[{:02}] = {:?}", hindex, position);
 //! }
 //! ```
 //! 
