@@ -4,4 +4,11 @@ version = "0.1.0"
 authors = ["Hiromu Sugiura <h.sugiura0705@outlook.com>"]
 edition = "2018"
 
+description   = "D-dimensional Hilbert curve"
+repository    = "https://github.com/osanshouo/hilbert-index"
+readme        = "README.md"
+license       = "MIT"
+keywords      = ["fractal", "hilbert", "curve", "space-filling-curve"]
+categories    = ["algorithms", "mathematics"]
+
 [dependencies]
