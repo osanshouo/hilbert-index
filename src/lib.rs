@@ -137,11 +137,11 @@ fn reduce<const D: usize>(p: &[usize; D], i: usize) -> usize {
         .fold(0, |l, (k, p)| l^( ((p >> i)&1) << k))
 }
 
-pub fn offset<const D: usize>(level: usize) -> usize {
-    (0..level).fold(0, |ofs, _| {
-        (ofs << D) | 1
-    })
-}
+// fn offset<const D: usize>(level: usize) -> usize {
+//     (0..level).fold(0, |ofs, _| {
+//         (ofs << D) | 1
+//     })
+// }
 
 /// Convert `[usize; D]` to `usize`.
 pub trait ToHilbertIndex<const D: usize> {
