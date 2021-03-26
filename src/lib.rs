@@ -9,23 +9,20 @@
 //! 
 //! This crate gives conversion between `usize` (Hilbert indices) and `[usize; D]` (grid points), 
 //! based on the D-dimensional [Hilbert curve](https://en.wikipedia.org/wiki/Hilbert_curve). 
-//! A Hilbert curve fills all lattice points in a D-dimensional cube,
-//! and can be used for D-dimensional data structures, such that [Hilbert R-tree](https://en.wikipedia.org/wiki/Hilbert_R-tree).
+//! A Hilbert curve fills all grid points in a D-dimensional cube,
+//! and can be used for D-dimensional data structures, such as [Hilbert R-tree](https://en.wikipedia.org/wiki/Hilbert_R-tree).
+//! 
+//! A `D`-dimensional Hilbert curve with level (order) `l` is a map from indices `0..2.pow(D*l)` to grid points `[usize; D]`,
+//! whose component `x` satisfy `0 <= x < 2.pow(l)`.
+//! Adjacent indices give adjacent grid points.
+//! Input outside the range is not supported and may cause unexpected results.
+//! 
+//! The implemented algorithm is based on Chris Hamilton's report, 
+//! "[Compact Hilbert Indices](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.133.7490&rep=rep1&type=pdf)".
+//! See also [Compact Hilbert indices: Space-filling curves for domains with unequal side lengths](https://doi.org/10.1016/j.ipl.2007.08.034).
 //! 
 //! Main focus of this crate is to use const-generics,
 //! which enables us to use `[usize; D]` instead of `Vec<usize>`.
-//! 
-//! 
-//! ## Mathematical details
-//! 
-//! A `D`-dimensional Hilbert curve with level `l` is a map from indices `0..2.pow(D*l)` to grid points `[usize; D]`,
-//! whose component `x` satisfy `0 <= x < 2.pow(l)`.
-//! Adjacent indices give adjacent grid points.
-//! Input outside the range is not supported and will cause unexpected results.
-//! 
-//! The implemented algorithm is based on the one in Chris Hamilton's report, 
-//! "[Compact Hilbert Indices](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.133.7490&rep=rep1&type=pdf)".
-//! See also [Compact Hilbert indices: Space-filling curves for domains with unequal side lengths](https://doi.org/10.1016/j.ipl.2007.08.034).
 //! 
 //! 
 //! ## Usage
@@ -40,8 +37,8 @@
 //! const D: usize = 3;
 //! 
 //! let level = 2;
-//! for hilbert_index in hilbert_index::indices::<D>(level) {
-//!     let position: [usize; D] = hilbert_index.from_hilbert_index(level);
+//! for hindex in hilbert_index::indices::<D>(level) {
+//!     let position: [usize; D] = hindex.from_hilbert_index(level);
 //!     println!("p[{:02}] = {:?}", hilbert_index, position);
 //! }
 //! ```
@@ -53,7 +50,6 @@
 //! 
 //! ```rust
 //! use hilbert_index::ToHilbertIndex;
-//! const D: usize = 3;
 //! 
 //! let level = 1;
 //! assert_eq!( 0, [ 0, 0, 0 ].to_hilbert_index(level));
