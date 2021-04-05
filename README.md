@@ -1,5 +1,8 @@
 # Hilbert-Index
 
+[![crates.io](https://img.shields.io/crates/v/hilbert_index?label=latest)](https://crates.io/crates/hilbert_index)
+[![Documentation](https://docs.rs/hilbert_index/badge.svg)](https://docs.rs/hilbert_index/)
+
 D-dimensional Hilbert curve for Rust.
 
 
