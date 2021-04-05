@@ -21,7 +21,7 @@
 //! Adjacent indices give adjacent grid points.
 //! Input outside the range is not supported and may cause unexpected results.
 //! 
-//! The implemented algorithm is based on Chris Hamilton's report, 
+//! The implemented algorithm is based on Butz's algorithm in Chris Hamilton's report, 
 //! "[Compact Hilbert Indices](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.133.7490&rep=rep1&type=pdf)".
 //! See also [Compact Hilbert indices: Space-filling curves for domains with unequal side lengths](https://doi.org/10.1016/j.ipl.2007.08.034).
 //! 
@@ -77,6 +77,21 @@
 /// Get an iterator that generates all Hilbert indices for a given level.
 /// 
 /// The return value is equal to `0..2usize.pow((D*level) as u32)`.
+/// 
+/// # Usage
+/// 
+/// ```
+/// use hilbert_index::{FromHilbertIndex, indices};
+/// const D: usize = 3;
+/// 
+/// let level = 4;
+/// 
+/// for hindex in indices::<D>(level) {
+///     let x: [usize; D] = hindex.from_hindex(level);
+///     println!("{:?}", x);
+/// }
+/// ```
+/// 
 pub fn indices<const D: usize>(level: usize) -> impl std::iter::Iterator<Item=usize> {
     0..2usize.pow((D*level) as u32)
 }
@@ -144,6 +159,26 @@ fn reduce<const D: usize>(p: &[usize; D], i: usize) -> usize {
 // }
 
 /// Convert `[usize; D]` to `usize`.
+/// 
+/// # Usage
+/// 
+/// ```
+/// use hilbert_index::ToHilbertIndex;
+/// const D: usize = 2;
+/// 
+/// let level = 3;
+/// 
+/// assert_eq!( 0, [0, 0].to_hilbert_index(level) );
+/// assert_eq!( 1, [0, 1].to_hilbert_index(level) );
+/// assert_eq!( 2, [1, 1].to_hilbert_index(level) );
+/// assert_eq!( 3, [1, 0].to_hilbert_index(level) );
+/// assert_eq!( 4, [2, 0].to_hilbert_index(level) );
+/// assert_eq!( 5, [3, 0].to_hilbert_index(level) );
+/// assert_eq!( 6, [3, 1].to_hilbert_index(level) );
+/// assert_eq!( 7, [2, 1].to_hilbert_index(level) );
+/// assert_eq!( 8, [2, 2].to_hilbert_index(level) );
+/// ```
+/// 
 pub trait ToHilbertIndex<const D: usize> {
     /// Convert a grid point `[usize; D]` to a Hilbert index `usize`.
     fn to_hilbert_index(&self, level: usize) -> usize;
@@ -155,6 +190,26 @@ pub trait ToHilbertIndex<const D: usize> {
 }
 
 /// Convert `usize` to `[usize; D]`.
+/// 
+/// # Usage
+/// 
+/// ```
+/// use hilbert_index::FromHilbertIndex;
+/// const D: usize = 2;
+/// 
+/// let level = 2;
+/// 
+/// assert_eq!( [0, 0], 0.from_hilbert_index(level) );
+/// assert_eq!( [1, 0], 1.from_hilbert_index(level) );
+/// assert_eq!( [1, 1], 2.from_hilbert_index(level) );
+/// assert_eq!( [0, 1], 3.from_hilbert_index(level) );
+/// assert_eq!( [0, 2], 4.from_hilbert_index(level) );
+/// assert_eq!( [0, 3], 5.from_hilbert_index(level) );
+/// assert_eq!( [1, 3], 6.from_hilbert_index(level) );
+/// assert_eq!( [1, 2], 7.from_hilbert_index(level) );
+/// assert_eq!( [2, 2], 8.from_hilbert_index(level) );
+/// ```
+/// 
 pub trait FromHilbertIndex<const D: usize> {
     /// Convert a Hilbert index `usize` to a grid point `[usize; D]`.
     fn from_hilbert_index(&self, level: usize) -> [usize; D];

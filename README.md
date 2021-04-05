@@ -24,7 +24,7 @@ whose component `x` satisfy `0 <= x < 2.pow(l)`.
 Adjacent indices give adjacent grid points.
 Input outside the range is not supported and may cause unexpected results.
 
-The implemented algorithm is based on Chris Hamilton's report, 
+The implemented algorithm is based on Butz's algorithm in Chris Hamilton's report, 
 "[Compact Hilbert Indices](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.133.7490&rep=rep1&type=pdf)".
 See also [Compact Hilbert indices: Space-filling curves for domains with unequal side lengths](https://doi.org/10.1016/j.ipl.2007.08.034).
 
